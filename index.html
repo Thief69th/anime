@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AniVerse — Your ultimate destination for anime reviews, news, seasonal guides and top lists.">
+  <meta property="og:title" content="AniVerse — Anime Blog">
+  <meta property="og:description" content="Honest anime reviews, breaking news, seasonal guides and top lists from passionate fans.">
+  <title>AniVerse — Anime Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700;900&family=Barlow+Italic&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --radius: 6px;
+      --radius-lg: 12px;
+      --tr: 0.22s ease;
+    }
+
+    /* =========================================================
+       THEMES
+    ========================================================= */
+
+    [data-theme="day"] {
+      --bg:          #ffffff;
+      --bg2:         #f2f6fc;
+      --bg3:         #e6eeff;
+      --text:        #0b0e1a;
+      --muted:       #505878;
+      --blue:        #1a6bff;
+      --blue-h:      #0052e0;
+      --blue-lt:     #ddeaff;
+      --border:      rgba(10,30,100,0.1);
+      --border-s:    rgba(10,30,100,0.18);
+      --tag-bg:      #e4eeff;
+      --tag-txt:     #1040c0;
+      --nav-bg:      rgba(255,255,255,0.94);
+      --shadow:      0 2px 16px rgba(0,60,200,0.09);
+      --badge-bg:    #1a6bff;
+      --badge-txt:   #ffffff;
+      --inv:         #ffffff;
+    }
+
+    [data-theme="night"] {
+      --bg:          #060a14;
+      --bg2:         #0d1424;
+      --bg3:         #0a1838;
+      --text:        #d8e6ff;
+      --muted:       #6278a0;
+      --blue:        #5ca4ff;
+      --blue-h:      #7bbeff;
+      --blue-lt:     #0a1a3d;
+      --border:      rgba(80,120,255,0.13);
+      --border-s:    rgba(80,120,255,0.22);
+      --tag-bg:      #0c1e44;
+      --tag-txt:     #7ab6ff;
+      --nav-bg:      rgba(6,10,20,0.95);
+      --shadow:      0 2px 24px rgba(0,0,0,0.6);
+      --badge-bg:    #5ca4ff;
+      --badge-txt:   #060a14;
+      --inv:         #060a14;
+    }
+
+    [data-theme="warm"] {
+      --bg:          #fdf9f4;
+      --bg2:         #f4ece0;
+      --bg3:         #eadfcf;
+      --text:        #170f08;
+      --muted:       #795c44;
+      --blue:        #1748c0;
+      --blue-h:      #0d35a0;
+      --blue-lt:     #e0eaff;
+      --border:      rgba(110,60,10,0.12);
+      --border-s:    rgba(110,60,10,0.22);
+      --tag-bg:      #dce8ff;
+      --tag-txt:     #0e32a0;
+      --nav-bg:      rgba(253,249,244,0.94);
+      --shadow:      0 2px 14px rgba(110,70,10,0.1);
+      --badge-bg:    #1748c0;
+      --badge-txt:   #ffffff;
+      --inv:         #fdf9f4;
+    }
+
+    /* =========================================================
+       BASE
+    ========================================================= */
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background var(--tr), color var(--tr);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; }
+
+    /* =========================================================
+       ANNOUNCEMENT BAR
+    ========================================================= */
+    .topbar {
+      background: var(--blue);
+      padding: 7px 24px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .topbar a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: underline;
+      margin-left: 6px;
+    }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: background var(--tr);
+    }
+
+    .hdr {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 26px;
+      letter-spacing: 3px;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+    .logo b { color: var(--text); font-weight: 400; }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+    .main-nav a {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 11px;
+      border-radius: var(--radius);
+      transition: color var(--tr), background var(--tr);
+      position: relative;
+    }
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: var(--blue);
+      background: var(--blue-lt);
+    }
+    .new-dot {
+      position: absolute;
+      top: 4px; right: 4px;
+      width: 6px; height: 6px;
+      background: #ff4040;
+      border-radius: 50%;
+    }
+
+    .hdr-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-search {
+      background: none;
+      border: 1px solid var(--border-s);
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color var(--tr), color var(--tr);
+    }
+    .btn-search:hover { border-color: var(--blue); color: var(--blue); }
+
+    .theme-sw {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .t-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px 11px;
+      border-radius: 18px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: all var(--tr);
+      white-space: nowrap;
+    }
+    .t-btn.on { background: var(--blue); color: white; }
+
+    .ham {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 38px; height: 38px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 18px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =========================================================
+       MOBILE NAV
+    ========================================================= */
+    .mob-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 9999;
+      flex-direction: column;
+      padding: 80px 32px 40px;
+      overflow-y: auto;
+    }
+    .mob-nav.open { display: flex; }
+    .mob-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 38px; height: 38px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mob-nav a {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 30px;
+      letter-spacing: 3px;
+      color: var(--text);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color var(--tr);
+    }
+    .mob-nav a:hover { color: var(--blue); }
+    .mob-themes {
+      margin-top: 24px;
+      display: flex;
+      gap: 10px;
+    }
+    .mob-themes button {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg2);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--tr);
+    }
+    .mob-themes button.on { background: var(--blue); color: white; border-color: var(--blue); }
+
+    /* =========================================================
+       SEARCH OVERLAY
+    ========================================================= */
+    .srch-ov {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 8000;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 90px;
+    }
+    .srch-ov.open { display: flex; }
+    .srch-box {
+      background: var(--bg);
+      border: 1px solid var(--border-s);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+      margin: 0 16px;
+    }
+    .srch-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .srch-row span { font-size: 18px; }
+    .srch-row input {
+      flex: 1;
+      border: none;
+      background: none;
+      font-size: 17px;
+      font-family: 'Barlow', sans-serif;
+      color: var(--text);
+      outline: none;
+    }
+    .srch-row input::placeholder { color: var(--muted); }
+    .srch-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1;
+    }
+    .srch-pills { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .srch-pills span { font-size: 12px; color: var(--muted); }
+
+    /* =========================================================
+       SHARED UTILS
+    ========================================================= */
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 0 24px; }
+    .sec-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .sec-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 22px;
+      letter-spacing: 2px;
+    }
+    .sec-title em { color: var(--blue); font-style: normal; }
+    .view-all {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .view-all:hover { text-decoration: underline; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+    .pill-blue  { background: var(--badge-bg); color: var(--badge-txt); }
+    .pill-red   { background: #e63030; color: white; }
+    .pill-purple { background: #7b3ff5; color: white; }
+    .pill-green { background: #0da060; color: white; }
+    .pill-amber { background: #d48000; color: white; }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-txt);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 13px;
+      border-radius: 20px;
+      transition: all var(--tr);
+    }
+    .tag:hover { background: var(--blue); color: white; }
+
+    .btn-p {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      transition: background var(--tr);
+    }
+    .btn-p:hover { background: var(--blue-h); }
+
+    .btn-s {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid var(--border-s);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all var(--tr);
+    }
+    .btn-s:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-in {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 56px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 68px;
+      line-height: 0.95;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .hero h1 em { color: var(--blue); font-style: normal; }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .hero-meta .sep { opacity: 0.4; }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .hero-frame {
+      background: var(--bg3);
+      border: 1.5px solid var(--border-s);
+      border-radius: var(--radius-lg);
+      aspect-ratio: 16/10;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-wm {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 72px;
+      color: var(--blue);
+      opacity: 0.18;
+      letter-spacing: 5px;
+      user-select: none;
+    }
+    .hero-stripe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--blue);
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+    .score-ring {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .hero-badge-label { font-size: 12px; font-weight: 700; }
+    .hero-badge-sub   { font-size: 11px; color: var(--muted); }
+
+    .hero-ep-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: var(--blue);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    /* =========================================================
+       CATEGORIES
+    ========================================================= */
+    .cats { padding: 40px 0 0; }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+    .cat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--tr);
+    }
+    .cat-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .cat-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--blue-lt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .cat-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    .cat-count { font-size: 11px; color: var(--muted); }
+
+    /* =========================================================
+       TOP RANKED STRIP
+    ========================================================= */
+    .ranked { padding: 40px 0; border-top: 1px solid var(--border); }
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .rank-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--tr);
+      background: var(--bg2);
+    }
+    .rank-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .rank-thumb {
+      background: var(--bg3);
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .rank-n {
+      position: absolute;
+      top: 8px; left: 10px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 28px;
+      color: var(--blue);
+      opacity: 0.45;
+      line-height: 1;
+    }
+    .rank-icon { font-size: 42px; opacity: 0.18; }
+    .rank-info { padding: 10px 12px 14px; }
+    .rank-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+    .rank-genre { font-size: 11px; color: var(--muted); }
+    .rank-score {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* =========================================================
+       MAIN CONTENT GRID
+    ========================================================= */
+    .content-wrap {
+      max-width: 1220px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+    }
+
+    /* Post grid */
+    .post-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .post-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--tr);
+    }
+    .post-card:hover {
+      border-color: var(--blue);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .post-thumb {
+      background: var(--bg3);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .post-wm {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 32px;
+      color: var(--blue);
+      opacity: 0.22;
+      letter-spacing: 3px;
+      user-select: none;
+    }
+    .post-badge {
+      position: absolute;
+      top: 10px; left: 10px;
+    }
+    .post-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+    .post-title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 8px;
+      color: var(--text);
+      transition: color var(--tr);
+    }
+    .post-card:hover .post-title { color: var(--blue); }
+    .post-exc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .post-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .score-tag {
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    /* Wide post (spans 2 cols) */
+    .post-wide {
+      grid-column: span 2;
+      flex-direction: row;
+    }
+    .post-wide .post-thumb {
+      width: 260px;
+      flex-shrink: 0;
+      aspect-ratio: auto;
+    }
+    .post-wide .post-title { font-size: 17px; }
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
+    .sidebar {}
+    .widget {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .w-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--blue);
+    }
+
+    .trend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all var(--tr);
+    }
+    .trend-item:last-child { border-bottom: none; }
+    .trend-item:hover .trend-name { color: var(--blue); }
+    .trend-n {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 24px;
+      color: var(--border-s);
+      line-height: 1;
+      min-width: 26px;
+    }
+    .trend-name { font-size: 13px; font-weight: 600; line-height: 1.4; margin-bottom: 3px; transition: color var(--tr); }
+    .trend-meta { font-size: 11px; color: var(--muted); }
+
+    .season-list { display: flex; flex-direction: column; gap: 8px; }
+    .season-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color var(--tr);
+    }
+    .season-item:hover { border-color: var(--blue); }
+    .season-name { font-size: 13px; font-weight: 600; }
+    .season-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 10px;
+    }
+    .on-air { background: var(--blue-lt); color: var(--blue); }
+    .upcoming { background: var(--bg3); color: var(--muted); }
+
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .about-text { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+
+    /* =========================================================
+       NEWSLETTER
+    ========================================================= */
+    .newsletter {
+      background: var(--blue);
+      padding: 52px 24px;
+      margin-top: 40px;
+    }
+    .nl-in {
+      max-width: 580px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .nl-in h2 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 38px;
+      letter-spacing: 3px;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .nl-in p { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 26px; }
+    .nl-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; }
+    .nl-form input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 14px;
+      font-family: 'Barlow', sans-serif;
+      outline: none;
+      transition: border-color var(--tr), background var(--tr);
+    }
+    .nl-form input::placeholder { color: rgba(255,255,255,0.55); }
+    .nl-form input:focus { border-color: white; background: rgba(255,255,255,0.2); }
+    .nl-form button {
+      background: white;
+      color: var(--blue);
+      border: none;
+      padding: 12px 22px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      letter-spacing: 0.4px;
+      transition: opacity var(--tr);
+      white-space: nowrap;
+    }
+    .nl-form button:hover { opacity: 0.88; }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+    .ftr-in {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 52px 24px 32px;
+    }
+    .ftr-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .ftr-logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 26px;
+      letter-spacing: 3px;
+      color: var(--blue);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .ftr-logo b { color: var(--text); font-weight: 400; }
+    .ftr-desc { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+    .socials { display: flex; gap: 9px; }
+    .soc-link {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 14px;
+      transition: all var(--tr);
+    }
+    .soc-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-lt); }
+
+    .ftr-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .ftr-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .ftr-col ul a { font-size: 13px; color: var(--muted); transition: color var(--tr); }
+    .ftr-col ul a:hover { color: var(--blue); }
+
+    .ftr-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .ftr-links { display: flex; gap: 18px; }
+    .ftr-links a { color: var(--muted); transition: color var(--tr); }
+    .ftr-links a:hover { color: var(--blue); }
+
+    /* =========================================================
+       SCROLL-TO-TOP
+    ========================================================= */
+    .s2t {
+      position: fixed;
+      bottom: 22px; right: 22px;
+      width: 40px; height: 40px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--tr);
+      z-index: 800;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    .s2t.show { opacity: 1; pointer-events: all; }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 960px) {
+      .main-nav { display: none; }
+      .ham { display: flex; }
+      .btn-search { display: none; }
+      .hero-in { grid-template-columns: 1fr; gap: 32px; }
+      .hero h1 { font-size: 52px; }
+      .hero-frame { display: none; }
+      .cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .rank-grid { grid-template-columns: repeat(3, 1fr); }
+      .content-wrap { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .post-wide { flex-direction: column; }
+      .post-wide .post-thumb { width: 100%; aspect-ratio: 16/9; }
+      .ftr-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .post-grid { grid-template-columns: 1fr; }
+      .post-wide { grid-column: span 1; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .rank-grid { grid-template-columns: repeat(2, 1fr); }
+      .ftr-grid { grid-template-columns: 1fr; }
+      .nl-form { flex-direction: column; }
+      .ftr-bottom { flex-direction: column; gap: 14px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── ANNOUNCEMENT BAR ─────────────────────────────────────── -->
+<div class="topbar">
+  <span>🌸</span>
+  Summer 2025 Anime Season is officially here — See our full seasonal guide
+  <a href="#">Explore →</a>
+</div>
+
+<!-- ── HEADER ───────────────────────────────────────────────── -->
+<header>
+  <div class="hdr">
+    <a class="logo" href="index.html">ANI<b>VERSE</b></a>
+
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="news.html">News <span class="new-dot"></span></a>
+      <a href="top-lists.html">Top Lists</a>
+      <a href="seasonal.html">Seasonal</a>
+      <a href="manga.html">Manga</a>
+      <a href="community.html">Community</a>
+    </nav>
+
+    <div class="hdr-right">
+      <button class="btn-search" onclick="openSearch()">🔍 Search</button>
+
+      <div class="theme-sw">
+        <button class="t-btn on" onclick="setTheme('day',0)">☀ Day</button>
+        <button class="t-btn"    onclick="setTheme('night',1)">🌙 Night</button>
+        <button class="t-btn"    onclick="setTheme('warm',2)">🍂 Warm</button>
+      </div>
+
+      <button class="ham" onclick="document.querySelector('.mob-nav').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── MOBILE NAV ────────────────────────────────────────────── -->
+<div class="mob-nav">
+  <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">✕</button>
+  <a href="index.html">Home</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="news.html">News</a>
+  <a href="top-lists.html">Top Lists</a>
+  <a href="seasonal.html">Seasonal</a>
+  <a href="manga.html">Manga</a>
+  <a href="community.html">Community</a>
+  <div class="mob-themes">
+    <button onclick="setTheme('day',0)">☀ Day</button>
+    <button onclick="setTheme('night',1)">🌙 Night</button>
+    <button onclick="setTheme('warm',2)">🍂 Warm</button>
+  </div>
+</div>
+
+<!-- ── SEARCH OVERLAY ────────────────────────────────────────── -->
+<div class="srch-ov" onclick="if(event.target===this)closeSearch()">
+  <div class="srch-box">
+    <div class="srch-row">
+      <span>🔍</span>
+      <input type="text" id="srchInput" placeholder="Search anime, reviews, news…">
+      <button class="srch-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="srch-pills">
+      <span>Popular:</span>
+      <a class="tag" href="#">Attack on Titan</a>
+      <a class="tag" href="#">Jujutsu Kaisen</a>
+      <a class="tag" href="#">One Piece</a>
+      <a class="tag" href="#">Chainsaw Man</a>
+      <a class="tag" href="#">Demon Slayer</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="hero-label">⭐ Featured Review</div>
+      <h1>Frieren:<br><em>Beyond</em><br>Journey's End</h1>
+      <div class="hero-meta">
+        <span>Fantasy · Adventure</span>
+        <span class="sep">·</span>
+        <span>2023 — Ongoing</span>
+        <span class="sep">·</span>
+        <span>28 Episodes</span>
+      </div>
+      <p class="hero-desc">A story about time, connection, and what it means to truly understand someone. Frieren is a rare masterpiece that rewards patience and reflection — setting a new standard for fantasy anime storytelling.</p>
+      <div class="hero-btns">
+        <a class="btn-p" href="#">📖 Read Full Review</a>
+        <a class="btn-s" href="reviews.html">All Reviews →</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="hero-frame">
+        <div class="hero-stripe"></div>
+        <div class="hero-wm">FRIEREN</div>
+        <div class="hero-ep-badge">28 EPS</div>
+        <div class="hero-badge">
+          <div class="score-ring">9.4</div>
+          <div>
+            <div class="hero-badge-label">MAL Score</div>
+            <div class="hero-badge-sub">600K+ ratings</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ─────────────────────────────────────────────── -->
+<section class="cats">
+  <div class="wrap">
+    <div class="sec-hdr">
+      <h2 class="sec-title">Browse by <em>Category</em></h2>
+      <a class="view-all" href="#">All Categories →</a>
+    </div>
+    <div class="cat-grid">
+      <a class="cat-card" href="reviews.html">
+        <div class="cat-icon">⚔️</div>
+        <div class="cat-name">Reviews</div>
+        <div class="cat-count">248 posts</div>
+      </a>
+      <a class="cat-card" href="news.html">
+        <div class="cat-icon">📰</div>
+        <div class="cat-name">News</div>
+        <div class="cat-count">412 posts</div>
+      </a>
+      <a class="cat-card" href="top-lists.html">
+        <div class="cat-icon">🏆</div>
+        <div class="cat-name">Top Lists</div>
+        <div class="cat-count">86 posts</div>
+      </a>
+      <a class="cat-card" href="seasonal.html">
+        <div class="cat-icon">🌸</div>
+        <div class="cat-name">Seasonal</div>
+        <div class="cat-count">120 posts</div>
+      </a>
+      <a class="cat-card" href="manga.html">
+        <div class="cat-icon">📚</div>
+        <div class="cat-name">Manga</div>
+        <div class="cat-count">94 posts</div>
+      </a>
+      <a class="cat-card" href="characters.html">
+        <div class="cat-icon">🎭</div>
+        <div class="cat-name">Characters</div>
+        <div class="cat-count">167 posts</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOP RANKED THIS SEASON ────────────────────────────────── -->
+<section class="ranked">
+  <div class="wrap">
+    <div class="sec-hdr">
+      <h2 class="sec-title">Top Rated <em>This Season</em></h2>
+      <a class="view-all" href="top-lists.html">Full Rankings →</a>
+    </div>
+    <div class="rank-grid">
+      <a class="rank-card" href="#">
+        <div class="rank-thumb">
+          <div class="rank-n">#1</div>
+          <span class="rank-icon">⚔️</span>
+        </div>
+        <div class="rank-info">
+          <div class="rank-title">Solo Leveling Season 2</div>
+          <div class="rank-genre">Action · Fantasy</div>
+          <div class="rank-score">★ 9.1</div>
+        </div>
+      </a>
+      <a class="rank-card" href="#">
+        <div class="rank-thumb">
+          <div class="rank-n">#2</div>
+          <span class="rank-icon">🔥</span>
+        </div>
+        <div class="rank-info">
+          <div class="rank-title">Demon Slayer: Infinity Castle</div>
+          <div class="rank-genre">Action · Supernatural</div>
+          <div class="rank-score">★ 9.3</div>
+        </div>
+      </a>
+      <a class="rank-card" href="#">
+        <div class="rank-thumb">
+          <div class="rank-n">#3</div>
+          <span class="rank-icon">🌙</span>
+        </div>
+        <div class="rank-info">
+          <div class="rank-title">Jujutsu Kaisen Season 3</div>
+          <div class="rank-genre">Supernatural · Action</div>
+          <div class="rank-score">★ 8.9</div>
+        </div>
+      </a>
+      <a class="rank-card" href="#">
+        <div class="rank-thumb">
+          <div class="rank-n">#4</div>
+          <span class="rank-icon">🌊</span>
+        </div>
+        <div class="rank-info">
+          <div class="rank-title">One Piece: Egghead Arc</div>
+          <div class="rank-genre">Adventure · Shonen</div>
+          <div class="rank-score">★ 8.7</div>
+        </div>
+      </a>
+      <a class="rank-card" href="#">
+        <div class="rank-thumb">
+          <div class="rank-n">#5</div>
+          <span class="rank-icon">⚡</span>
+        </div>
+        <div class="rank-info">
+          <div class="rank-title">Dungeon Meshi Part 2</div>
+          <div class="rank-genre">Fantasy · Comedy</div>
+          <div class="rank-score">★ 8.8</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── MAIN CONTENT + SIDEBAR ────────────────────────────────── -->
+<div class="content-wrap">
+
+  <!-- Posts -->
+  <section>
+    <div class="sec-hdr">
+      <h2 class="sec-title">Latest <em>Articles</em></h2>
+      <a class="view-all" href="#">All Posts →</a>
+    </div>
+
+    <div class="post-grid">
+
+      <!-- Wide featured -->
+      <a class="post-card post-wide" href="#">
+        <div class="post-thumb">
+          <div class="post-wm">CHAINSAW MAN</div>
+          <div class="post-badge"><span class="pill pill-blue">Review</span></div>
+        </div>
+        <div class="post-body">
+          <div class="post-title" style="font-size:17px;">Chainsaw Man Part 2: How Fujimoto Continues to Defy Every Expectation</div>
+          <div class="post-exc">Part 2 of Chainsaw Man takes everything that made the original unforgettable and cranks the dial. With a new protagonist, shifting alliances, and Fujimoto's signature visual chaos, this arc proves the story still has plenty of surprises left in store.</div>
+          <div class="post-foot">
+            <span>By Kenji Tanaka · Jun 5, 2025</span>
+            <span class="score-tag">9.0 / 10</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="#">
+        <div class="post-thumb">
+          <div class="post-wm">HxH</div>
+          <div class="post-badge"><span class="pill pill-red">News</span></div>
+        </div>
+        <div class="post-body">
+          <div class="post-title">Hunter × Hunter Manga Returns After Three-Year Hiatus</div>
+          <div class="post-exc">Yoshihiro Togashi confirms a comeback with 10 new chapters in the upcoming issue of Weekly Shonen Jump, sending fans worldwide into a frenzy.</div>
+          <div class="post-foot">
+            <span>Jun 4, 2025</span>
+            <span style="font-size:11px;color:var(--blue);">🔥 Trending</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="#">
+        <div class="post-thumb">
+          <div class="post-wm">TOP 10</div>
+          <div class="post-badge"><span class="pill pill-purple">Top List</span></div>
+        </div>
+        <div class="post-body">
+          <div class="post-title">10 Anime That Redefined the Isekai Genre in the Last 5 Years</div>
+          <div class="post-exc">From dark psychological takes to heartwarming slice-of-life, these series challenged every expectation of the genre and won fans over across the globe.</div>
+          <div class="post-foot">
+            <span>Jun 3, 2025</span>
+            <span style="font-size:11px;color:var(--muted);">14 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="#">
+        <div class="post-thumb">
+          <div class="post-wm">VINLAND</div>
+          <div class="post-badge"><span class="pill pill-blue">Review</span></div>
+        </div>
+        <div class="post-body">
+          <div class="post-title">Vinland Saga Season 3 — A Masterclass in Character Redemption</div>
+          <div class="post-exc">Thorfinn's journey comes full circle in a season focused less on action and more on the weight of conviction and the quiet cost of peace.</div>
+          <div class="post-foot">
+            <span>Jun 2, 2025</span>
+            <span class="score-tag">9.2 / 10</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="#">
+        <div class="post-thumb">
+          <div class="post-wm">BERSERK</div>
+          <div class="post-badge"><span class="pill pill-green">Manga</span></div>
+        </div>
+        <div class="post-body">
+          <div class="post-title">Berserk's Legacy: How Miura Changed Dark Fantasy Forever</div>
+          <div class="post-exc">Years after his passing, we examine how Berserk's raw emotional depth and uncompromising artistry continue to shape both manga and anime storytelling globally.</div>
+          <div class="post-foot">
+            <span>Jun 1, 2025</span>
+            <span style="font-size:11px;color:var(--muted);">22 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="#">
+        <div class="post-thumb">
+          <div class="post-wm">GUIDE</div>
+          <div class="post-badge"><span class="pill pill-amber">Guide</span></div>
+        </div>
+        <div class="post-body">
+          <div class="post-title">New to Anime? The Ultimate Beginner's Watching Guide for 2025</div>
+          <div class="post-exc">Whether you're brand new or returning after a long break, this curated guide covers the essentials across every genre to get you started on the right foot.</div>
+          <div class="post-foot">
+            <span>May 30, 2025</span>
+            <span style="font-size:11px;color:var(--muted);">18 min read</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <div style="text-align:center;margin-top:6px;">
+      <a class="btn-s" href="#">Load More Articles →</a>
+    </div>
+  </section>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="widget">
+      <div class="w-title">🔥 Trending Now</div>
+      <a class="trend-item" href="#" style="text-decoration:none;display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+        <div class="trend-n">01</div>
+        <div>
+          <div class="trend-name">Why Frieren Is the Best Anime of the Decade</div>
+          <div class="trend-meta">Reviews · 8.2K views</div>
+        </div>
+      </a>
+      <a class="trend-item" href="#" style="text-decoration:none;display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+        <div class="trend-n">02</div>
+        <div>
+          <div class="trend-name">HxH Chapter 401 — Full Summary &amp; Analysis</div>
+          <div class="trend-meta">News · 12.4K views</div>
+        </div>
+      </a>
+      <a class="trend-item" href="#" style="text-decoration:none;display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+        <div class="trend-n">03</div>
+        <div>
+          <div class="trend-name">Top 15 Most Anticipated Anime of Summer 2025</div>
+          <div class="trend-meta">Seasonal · 6.8K views</div>
+        </div>
+      </a>
+      <a class="trend-item" href="#" style="text-decoration:none;display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+        <div class="trend-n">04</div>
+        <div>
+          <div class="trend-name">Is Chainsaw Man's Anime Living Up to Its Potential?</div>
+          <div class="trend-meta">Reviews · 4.1K views</div>
+        </div>
+      </a>
+      <a class="trend-item" href="#" style="text-decoration:none;display:flex;align-items:flex-start;gap:12px;padding:10px 0;">
+        <div class="trend-n">05</div>
+        <div>
+          <div class="trend-name">My Hero Academia: Final Season — Everything We Know</div>
+          <div class="trend-meta">News · 9.3K views</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="widget">
+      <div class="w-title">🌸 Summer 2025 Airing</div>
+      <div class="season-list">
+        <a class="season-item" href="#">
+          <span class="season-name">Solo Leveling S2</span>
+          <span class="season-pill on-air">On Air</span>
+        </a>
+        <a class="season-item" href="#">
+          <span class="season-name">Dungeon Meshi Pt. 2</span>
+          <span class="season-pill on-air">On Air</span>
+        </a>
+        <a class="season-item" href="#">
+          <span class="season-name">Blue Lock Season 2</span>
+          <span class="season-pill on-air">On Air</span>
+        </a>
+        <a class="season-item" href="#">
+          <span class="season-name">Oshi no Ko Season 3</span>
+          <span class="season-pill upcoming">Upcoming</span>
+        </a>
+        <a class="season-item" href="#">
+          <span class="season-name">Bleach TYBW Part 4</span>
+          <span class="season-pill upcoming">Upcoming</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="w-title">🏷️ Popular Tags</div>
+      <div class="tag-cloud">
+        <a class="tag" href="#">Shonen</a>
+        <a class="tag" href="#">Isekai</a>
+        <a class="tag" href="#">Mecha</a>
+        <a class="tag" href="#">Slice of Life</a>
+        <a class="tag" href="#">Romance</a>
+        <a class="tag" href="#">Horror</a>
+        <a class="tag" href="#">Sports</a>
+        <a class="tag" href="#">Seinen</a>
+        <a class="tag" href="#">Shoujo</a>
+        <a class="tag" href="#">Psychological</a>
+        <a class="tag" href="#">Dark Fantasy</a>
+        <a class="tag" href="#">Comedy</a>
+        <a class="tag" href="#">Supernatural</a>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="w-title">ℹ️ About AniVerse</div>
+      <p class="about-text">AniVerse is an independent anime blog covering reviews, news, manga, and seasonal guides. Written by passionate fans for passionate fans — no ads, no fluff, always honest.</p>
+      <a class="btn-p" href="community.html" style="font-size:13px;padding:10px 18px;">Join the Community</a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ── NEWSLETTER ─────────────────────────────────────────────── -->
+<section class="newsletter">
+  <div class="nl-in">
+    <h2>STAY IN THE LOOP</h2>
+    <p>Weekly anime news, reviews, and seasonal guides delivered to your inbox. No spam — just anime.</p>
+    <div class="nl-form">
+      <input type="email" id="nlEmail" placeholder="Enter your email address…">
+      <button type="button" id="nlBtn" onclick="subscribe()">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="ftr-in">
+    <div class="ftr-grid">
+      <div>
+        <a class="ftr-logo" href="index.html">ANI<b>VERSE</b></a>
+        <p class="ftr-desc">Your ultimate destination for anime reviews, news, top lists, seasonal guides, and manga coverage. Independent. Passionate. Always honest.</p>
+        <div class="socials">
+          <a class="soc-link" href="#" title="X / Twitter">𝕏</a>
+          <a class="soc-link" href="#" title="Discord">💬</a>
+          <a class="soc-link" href="#" title="YouTube">▶</a>
+          <a class="soc-link" href="#" title="Instagram">📷</a>
+          <a class="soc-link" href="#" title="RSS Feed">⊕</a>
+        </div>
+      </div>
+
+      <div class="ftr-col">
+        <h4>Content</h4>
+        <ul>
+          <li><a href="reviews.html">Anime Reviews</a></li>
+          <li><a href="manga.html">Manga Reviews</a></li>
+          <li><a href="seasonal.html">Seasonal Guides</a></li>
+          <li><a href="top-lists.html">Top Lists</a></li>
+          <li><a href="characters.html">Character Deep Dives</a></li>
+          <li><a href="#">Studio Spotlights</a></li>
+        </ul>
+      </div>
+
+      <div class="ftr-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="news.html">Latest News</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="#">Watchlist Tool</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">RSS Feed</a></li>
+        </ul>
+      </div>
+
+      <div class="ftr-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Write for Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ftr-bottom">
+      <span>© 2025 AniVerse. All rights reserved. Built with ♥ for anime fans.</span>
+      <div class="ftr-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll-to-top -->
+<button class="s2t" id="s2tBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ── SCRIPTS ─────────────────────────────────────────────────── -->
+<script>
+  const THEMES = ['day','night','warm'];
+  const dBtns  = document.querySelectorAll('.t-btn');
+  const mBtns  = document.querySelectorAll('.mob-themes button');
+
+  function setTheme(t, idx) {
+    document.documentElement.setAttribute('data-theme', t);
+    dBtns.forEach((b, i) => b.classList.toggle('on', i === idx));
+    mBtns.forEach((b, i) => b.classList.toggle('on', i === idx));
+    localStorage.setItem('av-theme', t);
+  }
+
+  // Restore saved theme
+  (function(){
+    const s = localStorage.getItem('av-theme');
+    const i = THEMES.indexOf(s);
+    if(i >= 0) setTheme(s, i);
+  })();
+
+  // Search
+  function openSearch() {
+    document.querySelector('.srch-ov').classList.add('open');
+    setTimeout(() => document.getElementById('srchInput').focus(), 50);
+  }
+  function closeSearch() {
+    document.querySelector('.srch-ov').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') {
+      closeSearch();
+      document.querySelector('.mob-nav').classList.remove('open');
+    }
+    if((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault(); openSearch();
+    }
+  });
+
+  // Scroll-to-top
+  window.addEventListener('scroll', () => {
+    document.getElementById('s2tBtn').classList.toggle('show', window.scrollY > 400);
+  });
+
+  // Newsletter
+  function subscribe() {
+    const inp = document.getElementById('nlEmail');
+    const btn = document.getElementById('nlBtn');
+    if(inp.value && inp.value.includes('@') && inp.value.includes('.')) {
+      btn.textContent = '✓ You\'re Subscribed!';
+      btn.style.opacity = '0.7';
+      inp.value = '';
+      setTimeout(() => { btn.textContent = 'Subscribe'; btn.style.opacity = ''; }, 3500);
+    } else {
+      inp.style.borderColor = '#ff6060';
+      setTimeout(() => inp.style.borderColor = '', 1500);
+    }
+  }
+
+  // Close mobile nav on link click
+  document.querySelectorAll('.mob-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.querySelector('.mob-nav').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
